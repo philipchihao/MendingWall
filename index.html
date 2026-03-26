@@ -5,59 +5,292 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>"Mending Wall" by Robert Frost</title>
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
             font-family: 'Georgia', serif;
-            line-height: 1.6;
-            background-color: #f4f7f6;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
             color: #333;
-            margin: 0;
-            padding: 20px;
+            padding: 30px 20px;
         }
+
         .container {
-            max-width: 800px;
+            max-width: 820px;
             margin: 0 auto;
             background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
         }
-        h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-bottom: 10px; }
-        h2 { color: #27ae60; margin-top: 30px; }
+
+        h1 {
+            text-align: center;
+            color: #1a1a2e;
+            font-size: 1.9em;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 14px;
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+        }
+
+        h2 {
+            color: #1a1a2e;
+            margin-top: 34px;
+            margin-bottom: 14px;
+            font-size: 1.25em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .poem-text {
-            background: #f9f9f9;
-            padding: 20px;
-            border-left: 5px solid #2c3e50;
+            background: #f8f4ef;
+            padding: 24px 28px;
+            border-left: 5px solid #e74c3c;
             font-style: italic;
-            white-space: pre-wrap; /* 自动保留诗歌的换行 */
-            font-size: 1.1em;
+            white-space: pre-wrap;
+            font-size: 1.05em;
+            color: #444;
+            border-radius: 0 8px 8px 0;
+            line-height: 1.9;
+        }
+
+        .lesson-box {
+            background: linear-gradient(135deg, #e8f6f3, #d5f0ea);
+            padding: 20px 24px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #a8dfc9;
+        }
+
+        .lesson-box ul { padding-left: 20px; }
+        .lesson-box li { margin-bottom: 10px; color: #2c3e50; font-family: sans-serif; font-size: 0.95em; }
+
+        /* Quiz */
+        .q-block {
+            margin-bottom: 22px;
+            padding: 18px 20px;
+            border-radius: 10px;
+            background: #f9f9f9;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+        .q-block:hover { border-color: #d0d0d0; }
+        .q-block.correct { background: #eafaf1; border-color: #27ae60; }
+        .q-block.wrong { background: #fdf2f0; border-color: #e74c3c; }
+
+        .q-title {
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-family: sans-serif;
+            color: #1a1a2e;
+            font-size: 1em;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 7px 0;
+            cursor: pointer;
+            font-family: sans-serif;
+            font-size: 0.93em;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: background 0.2s;
             color: #444;
         }
-        .lesson-box {
-            background: #e8f6f3;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+        label:hover { background: #efefef; }
+        label.correct-label { background: #d5f5e3; color: #1e8449; font-weight: bold; }
+        label.wrong-label { background: #fadbd8; color: #c0392b; }
+
+        input[type="radio"] { accent-color: #e74c3c; width: 16px; height: 16px; flex-shrink: 0; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.15em;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: sans-serif;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(231,76,60,0.4);
+            margin-top: 10px;
         }
-        /* Quiz Styles */
-        .q-block { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #ccc; }
-        .q-title { font-weight: bold; margin-bottom: 10px; font-family: sans-serif; }
-        label { display: block; margin: 8px 0; cursor: pointer; font-family: sans-serif; }
-        label:hover { background: #f0f0f0; border-radius: 4px; }
-        button {
-            width: 100%; padding: 15px; background: #2c3e50; color: white;
-            border: none; border-radius: 5px; font-size: 1.1em; cursor: pointer; transition: 0.3s;
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231,76,60,0.5);
         }
-        button:hover { background: #1a252f; }
-        #res { margin-top: 20px; text-align: center; font-size: 1.5em; font-weight: bold; color: #27ae60; }
+        .submit-btn:active { transform: translateY(0); }
+
+        #res {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #27ae60;
+            font-family: sans-serif;
+            min-height: 60px;
+        }
+
+        .score-bar-wrap {
+            margin: 16px auto 0;
+            max-width: 400px;
+            background: #eee;
+            border-radius: 50px;
+            height: 12px;
+            overflow: hidden;
+        }
+        .score-bar {
+            height: 100%;
+            border-radius: 50px;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        /* =================== PERFECT SCORE OVERLAY =================== */
+        #perfect-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        #fireworks-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #perfect-modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            padding: 50px 60px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(255,215,0,0.6), 0 0 120px rgba(255,215,0,0.3);
+            border: 2px solid rgba(255,215,0,0.5);
+            pointer-events: all;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
+            max-width: 90vw;
+        }
+
+        @keyframes popIn {
+            to { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .perfect-star {
+            font-size: 3.5em;
+            display: block;
+            animation: spinStar 1s ease-in-out infinite alternate;
+        }
+        @keyframes spinStar {
+            from { transform: rotate(-10deg) scale(1); }
+            to { transform: rotate(10deg) scale(1.15); }
+        }
+
+        .perfect-title {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #ffd700;
+            margin: 16px 0 8px;
+            text-shadow: 0 0 20px rgba(255,215,0,0.8);
+            animation: glow 1.5s ease-in-out infinite alternate;
+            font-family: sans-serif;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(255,215,0,0.6); }
+            to { text-shadow: 0 0 30px rgba(255,215,0,1), 0 0 60px rgba(255,165,0,0.6); }
+        }
+
+        .perfect-score {
+            font-size: 4em;
+            font-weight: bold;
+            color: white;
+            font-family: sans-serif;
+            line-height: 1;
+            margin: 10px 0;
+        }
+
+        .perfect-msg {
+            color: #ccc;
+            font-size: 1em;
+            margin-top: 10px;
+            font-family: sans-serif;
+        }
+
+        .perfect-close {
+            margin-top: 28px;
+            padding: 12px 36px;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #1a1a2e;
+            border: none;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: sans-serif;
+            transition: transform 0.2s;
+        }
+        .perfect-close:hover { transform: scale(1.05); }
+
+        /* Stars floating in background */
+        .star-particle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.5em;
+            animation: floatUp 2s ease-out forwards;
+            z-index: 9998;
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+            100% { opacity: 0; transform: translateY(-200px) rotate(720deg) scale(0.3); }
+        }
+
+        /* subtle shake on perfect */
+        @keyframes celebrationShake {
+            0%,100% { transform: translateX(0); }
+            20% { transform: translateX(-6px) rotate(-1deg); }
+            40% { transform: translateX(6px) rotate(1deg); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+        .shake { animation: celebrationShake 0.5s ease; }
     </style>
 </head>
 <body>
 
-<div class="container">
+<!-- Perfect Score Overlay -->
+<div id="perfect-overlay">
+    <canvas id="fireworks-canvas"></canvas>
+    <div id="perfect-modal">
+        <span class="perfect-star">🌟</span>
+        <div class="perfect-title">PERFECT SCORE!</div>
+        <div class="perfect-score">100/100</div>
+        <div class="perfect-msg">You truly understand Robert Frost's masterpiece.<br>Outstanding work! 🎉</div>
+        <button class="perfect-close" onclick="closePerfect()">Continue ✨</button>
+    </div>
+</div>
+
+<div class="container" id="main-container">
     <h1>"Mending Wall" by Robert Frost</h1>
 
     <h2>📖 The Poem</h2>
-    <div class="poem-text">Something there is that doesn’t love a wall,
+    <div class="poem-text">Something there is that doesn't love a wall,
 That sends the frozen-ground-swell under it,
 And spills the upper boulders in the sun,
 And makes gaps even two can pass abreast.
@@ -75,7 +308,7 @@ We keep the wall between us as we go.
 To each the boulders that have fallen to each.
 And some are loaves and some so nearly balls
 We have to use a spell to make them balance:
-‘Stay where you are until our backs are turned!’
+'Stay where you are until our backs are turned!'
 We wear our fingers rough with handling them.
 Oh, just another kind of outdoor game,
 One on a side. It comes to little more:
@@ -83,25 +316,25 @@ There where it is we do not need the wall:
 He is all pine and I am apple orchard.
 My apple trees will never get across
 And eat the cones under his pines, I tell him.
-He only says, ‘Good fences make good neighbours.’
+He only says, 'Good fences make good neighbours.'
 Spring is the mischief in me, and I wonder
 If I could put a notion in his head:
-‘Why do they make good neighbours? Isn’t it
+'Why do they make good neighbours? Isn't it
 Where there are cows? But here there are no cows.
-Before I built a wall I’d ask to know
+Before I built a wall I'd ask to know
 What I was walling in or walling out,
 And to whom I was like to give offence.
-Something there is that doesn’t love a wall,
-That wants it down.’ I could say ‘Elves’ to him,
-But it’s not elves exactly, and I’d rather
+Something there is that doesn't love a wall,
+That wants it down.' I could say 'Elves' to him,
+But it's not elves exactly, and I'd rather
 He said it for himself. I see him there,
 Bringing a stone grasped firmly by the top
 In each hand, like an old-stone savage armed.
 He moves in darkness as it seems to me,
 Not of woods only and the shade of trees.
-He will not go behind his father’s saying,
+He will not go behind his father's saying,
 And he likes having thought of it so well
-He says again, ‘Good fences make good neighbours.’</div>
+He says again, 'Good fences make good neighbours.'</div>
 
     <h2>💡 10-Minute Lesson Highlights</h2>
     <div class="lesson-box">
@@ -114,19 +347,17 @@ He says again, ‘Good fences make good neighbours.’</div>
     </div>
 
     <h2>🎯 Interactive Quiz</h2>
-    <p style="color: #7f8c8d;">Test your knowledge! 5 random questions will appear each time you refresh the page.</p>
-    
-    <div id="quiz"></div>
-    <button onclick="check()">Submit Answers & Get Score</button>
-    <div id="res"></div>
+    <p style="color:#7f8c8d; font-family:sans-serif; font-size:0.9em; margin-bottom:18px;">Test your knowledge! 5 random questions will appear each time you refresh the page.</p>
 
+    <div id="quiz"></div>
+    <button class="submit-btn" onclick="check()">Submit Answers &amp; Get Score</button>
+    <div id="res"></div>
 </div>
 
 <script>
-    // 完整的 20 道题库
     const pool = [
         { q: "Who is the author of the poem 'Mending Wall'?", o: ["Walt Whitman", "Robert Frost", "Emily Dickinson", "Edgar Allan Poe"], a: 1 },
-        { q: "The opening line says: 'Something there is that doesn’t love a...'", o: ["Nature", "Wall", "Neighbor", "Spring"], a: 1 },
+        { q: "The opening line says: 'Something there is that doesn't love a...'", o: ["Nature", "Wall", "Neighbor", "Spring"], a: 1 },
         { q: "What is the phrase the neighbor constantly repeats?", o: ["Good fences make good neighbours", "Distance makes the heart grow fonder", "Do not cross this line", "Spring is the time for mending"], a: 0 },
         { q: "What kind of trees grow in the narrator's orchard?", o: ["Orange trees", "Apple trees", "Pear trees", "Cherry trees"], a: 1 },
         { q: "What kind of trees grow on the neighbor's property?", o: ["Oak", "Maple", "Pine", "Birch"], a: 2 },
@@ -148,44 +379,158 @@ He says again, ‘Good fences make good neighbours.’</div>
     ];
 
     let selected = [];
-    
-    // 初始化，随机抽5题
+
     function init() {
         selected = pool.sort(() => 0.5 - Math.random()).slice(0, 5);
         const container = document.getElementById('quiz');
         container.innerHTML = '';
         selected.forEach((item, i) => {
-            let options = item.o.map((opt, oi) => 
-                `<label><input type="radio" name="q${i}" value="${oi}"> ${String.fromCharCode(65 + oi)}. ${opt}</label>`
+            let options = item.o.map((opt, oi) =>
+                `<label id="lbl-${i}-${oi}"><input type="radio" name="q${i}" value="${oi}"> ${String.fromCharCode(65+oi)}. ${opt}</label>`
             ).join('');
-            container.innerHTML += `<div class="q-block"><div class="q-title">${i+1}. ${item.q}</div>${options}</div>`;
+            container.innerHTML += `<div class="q-block" id="qblock-${i}"><div class="q-title">${i+1}. ${item.q}</div>${options}</div>`;
         });
+        document.getElementById('res').innerHTML = '';
     }
 
-    // 提交算分
     function check() {
-        let score = 0;
-        let answered = 0;
+        let score = 0, answered = 0;
         selected.forEach((item, i) => {
             const r = document.querySelector(`input[name="q${i}"]:checked`);
-            if (r) {
-                answered++;
-                if (parseInt(r.value) === item.a) score += 20;
-            }
+            if (r) answered++;
         });
-        
-        if (answered < 5) {
-            alert("Please answer all 5 questions!");
-            return;
-        }
-        
+        if (answered < 5) { alert("Please answer all 5 questions!"); return; }
+
+        selected.forEach((item, i) => {
+            const r = document.querySelector(`input[name="q${i}"]:checked`);
+            const block = document.getElementById(`qblock-${i}`);
+            const chosen = parseInt(r.value);
+            if (chosen === item.a) {
+                score += 20;
+                block.classList.add('correct');
+                document.getElementById(`lbl-${i}-${chosen}`).classList.add('correct-label');
+            } else {
+                block.classList.add('wrong');
+                document.getElementById(`lbl-${i}-${chosen}`).classList.add('wrong-label');
+                document.getElementById(`lbl-${i}-${item.a}`).classList.add('correct-label');
+            }
+            // disable all radios
+            document.querySelectorAll(`input[name="q${i}"]`).forEach(inp => inp.disabled = true);
+        });
+
         const resDiv = document.getElementById('res');
-        resDiv.innerHTML = `Your Score: ${score}/100! <br><span style="font-size:0.6em; color:#7f8c8d; font-weight:normal;">(Refresh the page for new questions)</span>`;
+        let emoji = score === 100 ? '🏆' : score >= 80 ? '🎉' : score >= 60 ? '😊' : '📚';
+        let msg = score === 100 ? 'Perfect Score!' : score >= 80 ? 'Great job!' : score >= 60 ? 'Good effort!' : 'Keep studying!';
+        resDiv.innerHTML = `
+            ${emoji} <span style="color:${score===100?'#e74c3c':score>=80?'#27ae60':'#e67e22'}">${score}/100</span>
+            — ${msg}
+            <div class="score-bar-wrap"><div class="score-bar" id="sbar"></div></div>
+            <div style="font-size:0.5em;color:#aaa;font-weight:normal;margin-top:10px;">(Refresh for new questions)</div>
+        `;
+        setTimeout(() => {
+            document.getElementById('sbar').style.width = score + '%';
+        }, 100);
+
+        if (score === 100) {
+            setTimeout(launchPerfect, 600);
+        }
     }
-    
-    // 页面加载时执行
+
+    // ======= FIREWORKS =======
+    let fwCanvas, fwCtx, fwAnimId, particles = [];
+
+    function launchPerfect() {
+        // spawn floating star emojis
+        const starEmojis = ['⭐','🌟','✨','💫','🎊','🎉'];
+        for (let i = 0; i < 18; i++) {
+            setTimeout(() => {
+                const el = document.createElement('div');
+                el.className = 'star-particle';
+                el.textContent = starEmojis[Math.floor(Math.random() * starEmojis.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.top = (60 + Math.random() * 30) + 'vh';
+                el.style.animationDelay = '0s';
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 2200);
+            }, i * 100);
+        }
+
+        // shake the container
+        const c = document.getElementById('main-container');
+        c.classList.add('shake');
+        setTimeout(() => c.classList.remove('shake'), 500);
+
+        // show overlay & start fireworks
+        const overlay = document.getElementById('perfect-overlay');
+        overlay.style.display = 'block';
+        fwCanvas = document.getElementById('fireworks-canvas');
+        fwCanvas.width = window.innerWidth;
+        fwCanvas.height = window.innerHeight;
+        fwCtx = fwCanvas.getContext('2d');
+        particles = [];
+        for (let i = 0; i < 8; i++) {
+            setTimeout(() => spawnFirework(), i * 250);
+        }
+        fwAnimId = requestAnimationFrame(drawFireworks);
+        // keep launching fireworks
+        window._fwInterval = setInterval(() => {
+            for (let i = 0; i < 3; i++) setTimeout(() => spawnFirework(), i * 180);
+        }, 1200);
+    }
+
+    function spawnFirework() {
+        const x = Math.random() * fwCanvas.width;
+        const y = Math.random() * fwCanvas.height * 0.6 + 50;
+        const colors = ['#ffd700','#ff4757','#2ed573','#1e90ff','#ff6b81','#eccc68','#ff6348','#70a1ff','#7bed9f','#ffffff'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const count = 60 + Math.floor(Math.random() * 30);
+        for (let i = 0; i < count; i++) {
+            const angle = (Math.PI * 2 / count) * i + Math.random() * 0.3;
+            const speed = 2 + Math.random() * 5;
+            particles.push({
+                x, y,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                alpha: 1,
+                color,
+                radius: 1.5 + Math.random() * 2,
+                decay: 0.012 + Math.random() * 0.01,
+                gravity: 0.08
+            });
+        }
+    }
+
+    function drawFireworks() {
+        fwCtx.fillStyle = 'rgba(0,0,0,0.18)';
+        fwCtx.fillRect(0, 0, fwCanvas.width, fwCanvas.height);
+        particles = particles.filter(p => p.alpha > 0.05);
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += p.gravity;
+            p.vx *= 0.98;
+            p.alpha -= p.decay;
+            fwCtx.save();
+            fwCtx.globalAlpha = p.alpha;
+            fwCtx.fillStyle = p.color;
+            fwCtx.shadowColor = p.color;
+            fwCtx.shadowBlur = 6;
+            fwCtx.beginPath();
+            fwCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            fwCtx.fill();
+            fwCtx.restore();
+        });
+        fwAnimId = requestAnimationFrame(drawFireworks);
+    }
+
+    function closePerfect() {
+        document.getElementById('perfect-overlay').style.display = 'none';
+        cancelAnimationFrame(fwAnimId);
+        clearInterval(window._fwInterval);
+        particles = [];
+    }
+
     init();
 </script>
-
 </body>
 </html>
