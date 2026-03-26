@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"Mending Wall" by Robert Frost</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-bottom: 10px; }
+        h2 { color: #27ae60; margin-top: 30px; }
+        .poem-text {
+            background: #f9f9f9;
+            padding: 20px;
+            border-left: 5px solid #2c3e50;
+            font-style: italic;
+            white-space: pre-wrap; /* 自动保留诗歌的换行 */
+            font-size: 1.1em;
+            color: #444;
+        }
+        .lesson-box {
+            background: #e8f6f3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        /* Quiz Styles */
+        .q-block { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #ccc; }
+        .q-title { font-weight: bold; margin-bottom: 10px; font-family: sans-serif; }
+        label { display: block; margin: 8px 0; cursor: pointer; font-family: sans-serif; }
+        label:hover { background: #f0f0f0; border-radius: 4px; }
+        button {
+            width: 100%; padding: 15px; background: #2c3e50; color: white;
+            border: none; border-radius: 5px; font-size: 1.1em; cursor: pointer; transition: 0.3s;
+        }
+        button:hover { background: #1a252f; }
+        #res { margin-top: 20px; text-align: center; font-size: 1.5em; font-weight: bold; color: #27ae60; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>"Mending Wall" by Robert Frost</h1>
+
+    <h2>📖 The Poem</h2>
+    <div class="poem-text">Something there is that doesn’t love a wall,
+That sends the frozen-ground-swell under it,
+And spills the upper boulders in the sun,
+And makes gaps even two can pass abreast.
+The work of hunters is another thing:
+I have come after them and made repair
+Where they have left not one stone on a stone,
+But they would have the rabbit out of hiding,
+To please the yelping dogs. The gaps I mean,
+No one has seen them made or heard them made,
+But at spring mending-time we find them there.
+I let my neighbour know beyond the hill;
+And on a day we meet to walk the line
+And set the wall between us once again.
+We keep the wall between us as we go.
+To each the boulders that have fallen to each.
+And some are loaves and some so nearly balls
+We have to use a spell to make them balance:
+‘Stay where you are until our backs are turned!’
+We wear our fingers rough with handling them.
+Oh, just another kind of outdoor game,
+One on a side. It comes to little more:
+There where it is we do not need the wall:
+He is all pine and I am apple orchard.
+My apple trees will never get across
+And eat the cones under his pines, I tell him.
+He only says, ‘Good fences make good neighbours.’
+Spring is the mischief in me, and I wonder
+If I could put a notion in his head:
+‘Why do they make good neighbours? Isn’t it
+Where there are cows? But here there are no cows.
+Before I built a wall I’d ask to know
+What I was walling in or walling out,
+And to whom I was like to give offence.
+Something there is that doesn’t love a wall,
+That wants it down.’ I could say ‘Elves’ to him,
+But it’s not elves exactly, and I’d rather
+He said it for himself. I see him there,
+Bringing a stone grasped firmly by the top
+In each hand, like an old-stone savage armed.
+He moves in darkness as it seems to me,
+Not of woods only and the shade of trees.
+He will not go behind his father’s saying,
+And he likes having thought of it so well
+He says again, ‘Good fences make good neighbours.’</div>
+
+    <h2>💡 10-Minute Lesson Highlights</h2>
+    <div class="lesson-box">
+        <ul>
+            <li><b>Core Conflict:</b> The narrator's open-mindedness vs. the neighbor's blind adherence to tradition.</li>
+            <li><b>Key Symbolism:</b> The wall represents physical boundaries and mental barriers. The neighbor is compared to an "old-stone savage" trapped in the darkness of ignorance.</li>
+            <li><b>The Paradox:</b> Even though the wall separates them, the annual act of repairing it brings the two neighbors together.</li>
+            <li><b>Crucial Question:</b> Before building a wall, ask yourself: <i>"What am I walling in or walling out?"</i></li>
+        </ul>
+    </div>
+
+    <h2>🎯 Interactive Quiz</h2>
+    <p style="color: #7f8c8d;">Test your knowledge! 5 random questions will appear each time you refresh the page.</p>
+    
+    <div id="quiz"></div>
+    <button onclick="check()">Submit Answers & Get Score</button>
+    <div id="res"></div>
+
+</div>
+
+<script>
+    // 完整的 20 道题库
+    const pool = [
+        { q: "Who is the author of the poem 'Mending Wall'?", o: ["Walt Whitman", "Robert Frost", "Emily Dickinson", "Edgar Allan Poe"], a: 1 },
+        { q: "The opening line says: 'Something there is that doesn’t love a...'", o: ["Nature", "Wall", "Neighbor", "Spring"], a: 1 },
+        { q: "What is the phrase the neighbor constantly repeats?", o: ["Good fences make good neighbours", "Distance makes the heart grow fonder", "Do not cross this line", "Spring is the time for mending"], a: 0 },
+        { q: "What kind of trees grow in the narrator's orchard?", o: ["Orange trees", "Apple trees", "Pear trees", "Cherry trees"], a: 1 },
+        { q: "What kind of trees grow on the neighbor's property?", o: ["Oak", "Maple", "Pine", "Birch"], a: 2 },
+        { q: "In what season does the mending of the wall usually take place?", o: ["Spring", "Summer", "Autumn", "Winter"], a: 0 },
+        { q: "What natural phenomenon causes the wall to fall?", o: ["Heavy rain", "Earthquakes", "The frozen-ground-swell", "Strong winds"], a: 2 },
+        { q: "Aside from nature, who else leaves gaps in the wall?", o: ["Lumberjacks", "Hunters and their dogs", "Mischievous children", "Stray cows"], a: 1 },
+        { q: "Why does the narrator think the wall is unnecessary here?", o: ["They are good friends", "There are no cows here", "Building walls is too expensive", "Trees serve as a natural boundary"], a: 1 },
+        { q: "Who does the narrator jokingly suggest might be knocking the wall down?", o: ["The wind god", "Witches", "Elves", "Ghosts"], a: 2 },
+        { q: "What is the core theme of the poem?", o: ["Agricultural development", "Boundaries and communication", "Environmental protection", "How to train hunting dogs"], a: 1 },
+        { q: "Before building a wall, what does the narrator think one should know?", o: ["The price of stones", "What one is walling in or walling out", "The neighbor's schedule", "The exact height of the wall"], a: 1 },
+        { q: "How does the poem describe the shapes of the fallen boulders?", o: ["Loaves and balls", "Bricks and tiles", "Eggs and watermelons", "Frisbees and dice"], a: 0 },
+        { q: "How do the two men walk while mending the wall?", o: ["Both on the same side", "One in front of the other", "Each on their own side of the wall", "Walking randomly"], a: 2 },
+        { q: "The poem mentions using a 'spell' to make the stones balance. What does this reflect?", o: ["The neighbor knows magic", "The difficulty of the task and the narrator's humor", "The stones are cursed", "Local superstitions"], a: 1 },
+        { q: "Who taught the neighbor the saying 'Good fences make good neighbours'?", o: ["The village chief", "His father", "A teacher", "The mayor"], a: 1 },
+        { q: "What does the narrator compare the neighbor to when he is holding the stones?", o: ["A hardworking ant", "An old-stone savage armed", "A silent statue", "A heartless machine"], a: 1 },
+        { q: "The poem says the neighbor 'moves in darkness.' What does this darkness imply?", o: ["He is a pessimist", "He has poor eyesight", "He blindly follows tradition", "He likes working at night"], a: 2 },
+        { q: "How does the narrator view the act of mending the wall?", o: ["As extremely sacred", "As just another kind of outdoor game", "With great resistance", "As a waste of time"], a: 1 },
+        { q: "What is the narrative point of view of the poem?", o: ["First-person", "Second-person", "Third-person", "Omniscient"], a: 0 }
+    ];
+
+    let selected = [];
+    
+    // 初始化，随机抽5题
+    function init() {
+        selected = pool.sort(() => 0.5 - Math.random()).slice(0, 5);
+        const container = document.getElementById('quiz');
+        container.innerHTML = '';
+        selected.forEach((item, i) => {
+            let options = item.o.map((opt, oi) => 
+                `<label><input type="radio" name="q${i}" value="${oi}"> ${String.fromCharCode(65 + oi)}. ${opt}</label>`
+            ).join('');
+            container.innerHTML += `<div class="q-block"><div class="q-title">${i+1}. ${item.q}</div>${options}</div>`;
+        });
+    }
+
+    // 提交算分
+    function check() {
+        let score = 0;
+        let answered = 0;
+        selected.forEach((item, i) => {
+            const r = document.querySelector(`input[name="q${i}"]:checked`);
+            if (r) {
+                answered++;
+                if (parseInt(r.value) === item.a) score += 20;
+            }
+        });
+        
+        if (answered < 5) {
+            alert("Please answer all 5 questions!");
+            return;
+        }
+        
+        const resDiv = document.getElementById('res');
+        resDiv.innerHTML = `Your Score: ${score}/100! <br><span style="font-size:0.6em; color:#7f8c8d; font-weight:normal;">(Refresh the page for new questions)</span>`;
+    }
+    
+    // 页面加载时执行
+    init();
+</script>
+
+</body>
+</html>
